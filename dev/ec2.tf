@@ -8,7 +8,7 @@ resource "aws_instance" "example" {
   #ami           = "ami-081dc0707789c2daf" #ARM
   ami            = "ami-09d3b3274b6c5d4aa" #x86
   instance_type = "t2.micro"
-  tags = var.tags
+  tags = var.ec2_tags
   #iam_instance_profile = "SSMInstanceProfile"
   iam_instance_profile = aws_iam_instance_profile.ssm_policy.name
 }

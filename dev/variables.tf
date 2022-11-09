@@ -49,3 +49,16 @@ variable "tags" {
   type = map(string)
   default = {Environment = "dev"}
 }
+
+variable "ec2_tags" {
+  type = map(string)
+  #default = {Environment = "dev", "Patch Group" = "TOSCAN"}
+  default = {Environment = "dev", "Patch Group" = "TOPATCH"}
+}
+
+
+variable "ssm_patch_logs_prefix" {
+  description = "The prefix to use in S3 Bucket to store patch logs"
+  type        = string
+  default     = "myapp"
+}

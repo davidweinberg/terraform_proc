@@ -4,18 +4,25 @@ resource "aws_iam_role" "ssm_role" {
     assume_role_policy = <<EOF
     {
       "Version": "2012-10-17",
-      "Statement": {
-        "Effect": "Allow",
-        "Principal": {"Service": "ec2.amazonaws.com"},
-        "Action": "sts:AssumeRole"
-      }
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {"Service": "ec2.amazonaws.com"},
+          "Action": "sts:AssumeRole"
+        }
+      ]
     }
   EOF
 }
 
 resource "aws_iam_role_policy_attachment" "ssm_attach" {
   role       = aws_iam_role.ssm_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  #policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+  for_each  = toset([
+"arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+"arn:aws:iam::aws:policy/AmazonS3FullAccess"
+  ])
+  policy_arn = each.value
 }
 
 resource "aws_iam_instance_profile" "ssm_policy" {
