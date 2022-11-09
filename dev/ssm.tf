@@ -87,7 +87,7 @@ module "ssm-patch-management" {
   # ]
 
   # parameters for install
-  install_maintenance_window_schedule = "cron(0 0 4 ? * WED *)"
+  install_maintenance_window_schedule = "cron(0 45 4 ? * WED *)"
   s3_bucket_prefix_install_logs       = format("install/%s", var.ssm_patch_logs_prefix)
   #  install_maintenance_windows_targets = [
   #  {
